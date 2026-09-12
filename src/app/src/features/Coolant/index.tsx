@@ -20,6 +20,7 @@ import includes from 'lodash/includes';
 import { useCallback } from 'react';
 import { useTypedSelector } from 'app/hooks/useTypedSelector';
 import { useWorkspaceState } from 'app/hooks/useWorkspaceState';
+import store from 'app/store';
 import { usePostHog } from 'posthog-js/react';
 
 export interface CoolantProps {
@@ -48,12 +49,12 @@ const getAccessoryIcon = (label: string, defaultCommand: 'M7' | 'M8') => {
 };
 
 export function Coolant({ mistActive, floodActive }: CoolantProps) {
-    const {
-        m7Label = 'Mist',
-        m7CustomLabel = '',
-        m8Label = 'Flood',
-        m8CustomLabel = '',
-    } = useWorkspaceState();
+    const workspace = useWorkspaceState();
+
+    const m7Label = workspace?.m7Label || store.get('workspace.m7Label', 'Mist');
+    const m7CustomLabel = workspace?.m7CustomLabel ?? store.get('workspace.m7CustomLabel', '');
+    const m8Label = workspace?.m8Label || store.get('workspace.m8Label', 'Flood');
+    const m8CustomLabel = workspace?.m8CustomLabel ?? store.get('workspace.m8CustomLabel', '');
 
     const finalM7Label = m7Label === 'Custom' ? (m7CustomLabel.trim() || 'M7') : m7Label;
     const finalM8Label = m8Label === 'Custom' ? (m8CustomLabel.trim() || 'M8') : m8Label;

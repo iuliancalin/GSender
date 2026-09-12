@@ -936,7 +936,11 @@ const EdgeCornerFinderModal: React.FC<ModalProps> = ({
                         `G1 X${-xDir * effectiveRetract} F[PROBE_RETRACT_FEED]`,
                         'G4 P1',
                         `G10 L20 P0 X${-xDir * (effectiveRetract + effectiveTipRad)}`,
-                        rapidCmd(`X${-xDir * (effectiveRetract + 5)}`),
+                        rapidCmd(`X${-xDir * 5}`),
+                        '',
+                        '; --- SWEEP AROUND CORNER IN OPEN AIR (AT DEPTH) ---',
+                        rapidCmd(`Y${-yDir * 28}`),
+                        rapidCmd(`X${xDir * 28}`),
                         '',
                         '; --- PROBE CORNER 2ND EDGE (Y) ---',
                         `G38.2 Y${yDir * 25} F[PROBE_FEED_FAST]`,
@@ -946,6 +950,7 @@ const EdgeCornerFinderModal: React.FC<ModalProps> = ({
                         `G1 Y${-yDir * effectiveRetract} F[PROBE_RETRACT_FEED]`,
                         'G4 P1',
                         `G10 L20 P0 Y${-yDir * (effectiveRetract + effectiveTipRad)}`,
+                        rapidCmd(`Y${-yDir * 5}`),
                     );
                 }
             }

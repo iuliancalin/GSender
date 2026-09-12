@@ -25,7 +25,7 @@ import * as longMillGrblEEPROM from './grbl/longmill';
 import * as longMillGrblHALEEPROM from './grblHAL/longmill';
 import * as millOneGrblEEPROM from './grbl/millone';
 import * as altmillSettings from './grblHAL/Altmill';
-
+import * as voronCascadeSettings from './grblHAL/voronCascade';
 export default [
     {
         id: 0,
@@ -407,4 +407,18 @@ export default [
             height: 465,
         },
     },
+   {
+    id: 60,
+    company: '',
+    name: 'Voron Cascade',
+    type: 'BTT Scylla',
+    version: 'V1.0',
+    mm: {
+        width: 260,
+        depth: 220,
+        height: 100,
+    },
+    grblHALeepromSettings: voronCascadeSettings.DEFAULT,
+    orderedSettings: voronCascadeSettings.ORDERED,
+},
 ];

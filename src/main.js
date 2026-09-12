@@ -583,6 +583,7 @@ const main = () => {
             const internetConnectivity = await isOnline();
             if (internetConnectivity) {
                 autoUpdater.autoDownload = false; // We don't want to force update but will prompt until it is updated
+                autoUpdater.allowPrerelease = true;
                 // There may be situations where something is blocking the update check outside of internet connectivity
                 // This sets a 4 second timeout on the await.
                 try {
